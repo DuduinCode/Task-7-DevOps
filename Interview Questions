@@ -1,0 +1,91 @@
+1. What does Netdata monitor?
+Netdata monitors the real-time performance and health of systems and applications. It collects metrics like:
+
+CPU usage
+Memory usage
+Disk I/O
+Network traffic
+System processes
+Docker containers
+Web servers, databases, and more via plugins
+
+ 2. How do you view real-time metrics?
+Netdata provides a web-based dashboard accessible via a browser:
+
+http://<server-ip>:19999
+It auto-refreshes charts and shows metrics with per-second granularity in real time.
+
+3. What is a collector?
+A collector in Netdata is a plugin or script that collects specific metrics from the system or services.
+Types include:
+
+Internal collectors: CPU, RAM, Disk, etc.
+External plugins: For MySQL, Redis, Nginx, Apache, Docker, etc.
+
+ 4. How is Netdata different from Prometheus?
+
+Feature	Netdata	Prometheus
+Purpose	Real-time monitoring & visualization	Time-series metric collection
+Dashboard	Built-in and real-time	Needs external tools like Grafana
+Alerting	Built-in	Needs Alertmanager
+Data retention	Short-term	Long-term storage available
+Setup	Very easy	Requires setup of exporters
+
+5. What are some performance KPIs to watch?
+Key Performance Indicators:
+
+CPU Load & Utilization
+
+Memory Usage
+
+Disk Read/Write IOPS
+
+Network Throughput
+
+System Uptime
+
+Docker container stats (CPU, Memory)
+
+Application-specific metrics (MySQL QPS, Nginx requests, etc.)
+
+ 6. How to deploy Netdata on a VM?
+Quick deployment using Docker:
+
+
+sudo docker run -d --name=netdata \
+-p 19999:19999 \
+--cap-add SYS_PTRACE \
+--security-opt apparmor=unconfined \
+netdata/netdata
+Alternatively, install using the kickstart script:
+
+
+bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+
+7. How does Netdata alerting work?
+Netdata comes with built-in alarms based on thresholds.
+
+Alerts can be configured in health.d/ files.
+
+Supports notifications via:
+
+Email
+
+Slack
+
+Discord
+
+PagerDuty and more
+
+You can edit thresholds, duration, and recipients.
+
+8. What is a dashboard in this context?
+A dashboard is a web-based UI provided by Netdata that:
+
+Visualizes system metrics using charts
+
+Auto-refreshes in real-time (per second)
+
+Categorizes views by CPU, RAM, Disk, Docker, etc.
+
+Helps in identifying bottlenecks and abnormal patterns quickly
